@@ -1,3 +1,4 @@
+import { NovaFaceRig } from "./NovaFaceRig";
 import { Composition, CalculateMetadataFunction } from "remotion";
 import { Explainer, ExplainerProps } from "./Explainer";
 import {
@@ -146,7 +147,12 @@ export const Root: React.FC = () => {
           cuts: [],
           overlays: [],
           captions: [],
-          audio: {},
+          audio: {
+  narration: {
+    src: "audio/nova.wav",
+    volume: 1,
+  },
+},
         }}
         calculateMetadata={calculateMetadata}
       />
@@ -330,6 +336,49 @@ export const Root: React.FC = () => {
           overlay: true,
         } as EndTagProps}
       />
-    </>
+    
+      <Composition
+        id="OctopusShort"
+        component={Explainer}
+        durationInFrames={1431}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          theme: "flat-motion-graphics",
+          cuts: [{
+            id: "octopus-main",
+            source: "footage/octopus-1.mp4",
+            in_seconds: 0,
+            out_seconds: 46.68,
+            source_in_seconds: 0
+          }],
+          overlays: [
+            { type: "hero_title", in_seconds: 0, out_seconds: 4.5, text: "THREE HEARTS", subtitle: "One extraordinary ocean animal" },
+            { type: "stat_reveal", in_seconds: 5.5, out_seconds: 10.5, text: "3 HEARTS", subtitle: "Two pump blood through the gills" },
+            { type: "section_title", in_seconds: 11, out_seconds: 17, text: "BLUE BLOOD", subtitle: "Copper-rich hemocyanin carries oxygen" },
+            { type: "section_title", in_seconds: 20, out_seconds: 27, text: "EIGHT ARMS", subtitle: "Many neurons are distributed through the arms" },
+            { type: "section_title", in_seconds: 31, out_seconds: 38, text: "A HEART THAT STOPS", subtitle: "Its main systemic heart pauses during swimming" },
+            { type: "hero_title", in_seconds: 40, out_seconds: 46.68, text: "THE OCTOPUS", subtitle: "Three hearts. Blue blood. Remarkable intelligence." }
+          ],
+          captions: [],
+          audio: {
+            narration: {
+              src: "audio/octopus-narration.wav",
+              volume: 1
+            }
+          }
+        }}
+        calculateMetadata={calculateMetadata}
+      />
+      <Composition
+        id="NovaFaceRig"
+        component={NovaFaceRig}
+        durationInFrames={1200}
+        fps={30}
+        width={853}
+        height={1280}
+      />
+</>
   );
 };
